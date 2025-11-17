@@ -1,29 +1,34 @@
-<img width="1910" height="983" alt="Screenshot 2025-11-17 121739" src="https://github.com/user-attachments/assets/2b7ab4bd-ea30-409e-b559-128b1daf6624" />
+<img width="1910" height="983" alt="image" src="https://github.com/user-attachments/assets/9dbadf08-0c7d-47c4-bba5-d2208c4f60f7" />
 
 
-Task 3 – Vulnerability Scan Report (Using Nmap)**
 
-Tool Used: Nmap 7.98
+# 📄 **Task 3 – Vulnerability Scan Report (Using Nmap)**
 
-Target: Hidden (Local Windows Machine)
---
-1. Objective
+### **Tool Used:** Nmap 7.98
 
-To perform a basic vulnerability assessment on my PC using the free tool Nmap, identify open ports, exposed services, and potential vulnerabilities.
+### **Target:** HIDDEN (Local Windows Machine)
+
+### **Date:** 17 November 2025
 
 ---
 
-2. Scan Command Used
+# 🔍 **1. Objective**
+
+To perform a basic vulnerability assessment on my PC using the free tool **Nmap**, identify open ports, exposed services, and potential vulnerabilities.
+
+---
+
+# 🛠 **2. Scan Command Used**
 
 ```
-nmap -sV IP Hidden
+nmap -sV HIDDEN
 ```
 
 This performs version detection and identifies services running on open ports.
 
 ---
 
-3. Scan Results
+# 📊 **3. Scan Results**
 
 ```
 Starting Nmap 7.98 ( https://nmap.org ) at 2025-11-17 11:36 +0530
@@ -41,44 +46,45 @@ Service Info: OS: Windows
 ```
 
 ---
-4. Security Analysis of Each Open Port
 
-✔ Port 135 – MSRPC
+# 🧩 **4. Security Analysis of Each Open Port**
+
+### **✔ Port 135 – MSRPC**
 
 * Used for Windows remote procedure calls.
 * Attack risk: Remote code execution (historical worm vectors).
-* Severity: Medium
+* Severity: **Medium**
 
 ---
 
-✔ Port 139 – NetBIOS
+### **✔ Port 139 – NetBIOS**
 
 * Used for file & printer sharing.
 * Attack risk: Information leakage, SMB attacks.
-* Severity: Medium
+* Severity: **Medium**
 
 ---
 
-✔ Port 445 – SMB (Microsoft-DS)
+### **✔ Port 445 – SMB (Microsoft-DS)**
 
 * Used for Windows file sharing.
 * Historically targeted by:
 
   * WannaCry
   * EternalBlue
-* Severity: High
+* Severity: **High**
 
 ---
 
-✔ Port 2869 – HTTPAPI (UPnP / SSDP)
+### **✔ Port 2869 – HTTPAPI (UPnP / SSDP)**
 
 * Used by Windows for network device discovery.
 * Attack risk: UPnP vulnerabilities, information disclosure.
-* Severity: Medium
+* Severity: **Medium**
 
 ---
 
-❗ Port 3306 – MySQL (Unauthorized)
+### **❗ Port 3306 – MySQL (Unauthorized)**
 
 * MySQL service is running
 * Nmap couldn’t authenticate:
@@ -86,22 +92,22 @@ Service Info: OS: Windows
   * Means password may be weak
   * Or MySQL is exposed unnecessarily
 
-➡ Major issue if not intentionally installed
+➡ **Major issue if not intentionally installed**
 
-* Severity: High
+* Severity: **High**
 
 ---
 
-❗ Port 3389 – Remote Desktop (RDP)
+### **❗ Port 3389 – Remote Desktop (RDP)**
 
 * RDP exposed on LAN
 * RDP is frequently attacked (bruteforce, credential theft).
 * Without Network Level Authentication (NLA), it’s vulnerable.
-* Severity: High
+* Severity: **High**
 
 ---
 
-# 5. Overall Vulnerability Summary
+# 🚨 **5. Overall Vulnerability Summary**
 
 | Port | Service      | Severity | Risk Summary                       |
 | ---- | ------------ | -------- | ---------------------------------- |
@@ -114,9 +120,9 @@ Service Info: OS: Windows
 
 ---
 
-# 6. Recommended Fixes
+# 🎯 **6. Recommended Fixes**
 
-1. Disable SMBv1
+### ✔ **1. Disable SMBv1**
 
 WannaCry-style attacks target SMBv1.
 
@@ -128,7 +134,7 @@ Disable-WindowsOptionalFeature -Online -FeatureName smb1protocol
 
 ---
 
-2. Close Port 139 and 445 if not needed
+### ✔ **2. Close Port 139 and 445 if not needed**
 
 * Go to: Windows Features
 * Turn off:
@@ -138,7 +144,7 @@ Disable-WindowsOptionalFeature -Online -FeatureName smb1protocol
 
 ---
 
-3. Disable RDP (Port 3389) if not required
+### ✔ **3. Disable RDP (Port 3389) if not required**
 
 Settings → System → Remote Desktop → Turn off
 OR
@@ -150,7 +156,7 @@ Ensure:
 
 ---
 
-4. MySQL – If you did NOT install it
+### ✔ **4. MySQL – If you did NOT install it**
 
 Disable the service:
 
@@ -158,7 +164,7 @@ Disable the service:
 services.msc
 ```
 
-Find MySQL → Stop → Disable
+Find **MySQL** → Stop → Disable
 
 If you installed it intentionally:
 
@@ -167,7 +173,7 @@ If you installed it intentionally:
 
 ---
 
-5. Block these ports on Windows Firewall
+### ✔ **5. Block these ports on Windows Firewall**
 
 * 135
 * 139
@@ -179,7 +185,11 @@ unless required.
 
 ---
 
-7. Conclusion
+# 📝 **7. Conclusion**
 
 The Nmap vulnerability scan revealed that several high-risk and medium-risk ports are open on the system, especially **SMB (445), MySQL (3306), and RDP (3389)**. These services can expose the system to unauthorized access, malware propagation, or brute-force attacks.
 By applying the recommended fixes such as disabling unnecessary services, closing ports, and enabling security features, the overall security posture of the system can be significantly improved.
+
+---
+
+If you want, I can also create a **formatted README.md** or help you create the **GitHub repo structure**.
